@@ -52,9 +52,9 @@ all = ["smart-rag-agent[rerank,eval,dev]"]
 smart-rag = "smart_rag.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/YOUR_USERNAME/smart-rag-agent"
-Repository = "https://github.com/YOUR_USERNAME/smart-rag-agent"
-Issues = "https://github.com/YOUR_USERNAME/smart-rag-agent/issues"
+Homepage = "https://github.com/Ending200231/smart-rag-agent"
+Repository = "https://github.com/Ending200231/smart-rag-agent"
+Issues = "https://github.com/Ending200231/smart-rag-agent/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]

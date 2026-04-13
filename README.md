@@ -1,5 +1,7 @@
 # Smart RAG Agent
 
+[English](README.md) | [中文](README_zh.md)
+
 An adaptive RAG (Retrieval-Augmented Generation) agent that **autonomously decides retrieval strategies** instead of blindly retrieving for every query.
 
 Give it a documentation site URL or a local directory — it crawls, indexes, and answers your questions intelligently.
