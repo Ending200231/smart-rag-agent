@@ -45,7 +45,7 @@ Traditional RAG has three pain points:
               │    │Generate│◄─────────────┘
               │    └───┬────┘
               │        │
-              └────────┼────────┐
+              └────────┤
                        │
               ┌────────▼────────┐
               │  Agent Response │
