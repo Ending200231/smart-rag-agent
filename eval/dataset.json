@@ -1,0 +1,334 @@
+{
+  "metadata": {
+    "description": "Evaluation dataset for Smart RAG Agent on FastAPI documentation",
+    "version": "1.0",
+    "total_questions": 40
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "FastAPI 中如何定义路径参数？",
+      "expected_route": "retrieve",
+      "category": "simple",
+      "expected_keywords": ["path parameter", "路径参数", "{item_id}"],
+      "reference_doc": "tutorial_first-steps"
+    },
+    {
+      "id": 2,
+      "question": "FastAPI 中如何使用查询参数？",
+      "expected_route": "retrieve",
+      "category": "simple",
+      "expected_keywords": ["query parameter", "查询参数", "Optional"],
+      "reference_doc": "tutorial_query-params"
+    },
+    {
+      "id": 3,
+      "question": "FastAPI 中如何定义请求体？",
+      "expected_route": "retrieve",
+      "category": "simple",
+      "expected_keywords": ["request body", "BaseModel", "Pydantic"],
+      "reference_doc": "tutorial_body"
+    },
+    {
+      "id": 4,
+      "question": "FastAPI 中如何返回 JSON 响应？",
+      "expected_route": "retrieve",
+      "category": "simple",
+      "expected_keywords": ["JSONResponse", "response", "dict"],
+      "reference_doc": "tutorial_response-model"
+    },
+    {
+      "id": 5,
+      "question": "FastAPI 如何处理表单数据？",
+      "expected_route": "retrieve",
+      "category": "simple",
+      "expected_keywords": ["Form", "表单", "form data"],
+      "reference_doc": "tutorial_request-forms"
+    },
+    {
+      "id": 6,
+      "question": "FastAPI 中如何上传文件？",
+      "expected_route": "retrieve",
+      "category": "simple",
+      "expected_keywords": ["UploadFile", "File", "文件上传"],
+      "reference_doc": "tutorial_request-files"
+    },
+    {
+      "id": 7,
+      "question": "FastAPI 中如何设置响应状态码？",
+      "expected_route": "retrieve",
+      "category": "simple",
+      "expected_keywords": ["status_code", "HTTPStatus", "201"],
+      "reference_doc": "tutorial_response-status-code"
+    },
+    {
+      "id": 8,
+      "question": "FastAPI 如何处理错误和异常？",
+      "expected_route": "retrieve",
+      "category": "simple",
+      "expected_keywords": ["HTTPException", "exception handler", "异常处理"],
+      "reference_doc": "tutorial_handling-errors"
+    },
+    {
+      "id": 9,
+      "question": "FastAPI 中如何使用依赖注入？",
+      "expected_route": "retrieve",
+      "category": "simple",
+      "expected_keywords": ["Depends", "dependency injection", "依赖注入"],
+      "reference_doc": "tutorial_dependencies"
+    },
+    {
+      "id": 10,
+      "question": "FastAPI 如何配置 CORS？",
+      "expected_route": "retrieve",
+      "category": "simple",
+      "expected_keywords": ["CORSMiddleware", "CORS", "origins"],
+      "reference_doc": "tutorial_cors"
+    },
+    {
+      "id": 11,
+      "question": "FastAPI 中如何使用中间件？",
+      "expected_route": "retrieve",
+      "category": "simple",
+      "expected_keywords": ["middleware", "中间件", "@app.middleware"],
+      "reference_doc": "tutorial_middleware"
+    },
+    {
+      "id": 12,
+      "question": "FastAPI 如何实现 WebSocket 通信？",
+      "expected_route": "retrieve",
+      "category": "simple",
+      "expected_keywords": ["WebSocket", "websocket", "ws"],
+      "reference_doc": "tutorial_websockets"
+    },
+    {
+      "id": 13,
+      "question": "FastAPI 中如何使用后台任务？",
+      "expected_route": "retrieve",
+      "category": "simple",
+      "expected_keywords": ["BackgroundTasks", "background", "后台任务"],
+      "reference_doc": "tutorial_background-tasks"
+    },
+    {
+      "id": 14,
+      "question": "FastAPI 支持哪些数据验证功能？",
+      "expected_route": "retrieve",
+      "category": "simple",
+      "expected_keywords": ["Pydantic", "validation", "数据验证"],
+      "reference_doc": "features"
+    },
+    {
+      "id": 15,
+      "question": "FastAPI 中如何配置数据库连接？",
+      "expected_route": "retrieve",
+      "category": "simple",
+      "expected_keywords": ["database", "SQLAlchemy", "数据库"],
+      "reference_doc": "tutorial_sql-databases"
+    },
+    {
+      "id": 16,
+      "question": "FastAPI 的 Depends 和 BackgroundTasks 有什么区别？分别在什么场景下使用？",
+      "expected_route": "decompose",
+      "category": "complex",
+      "expected_keywords": ["Depends", "BackgroundTasks", "依赖注入", "后台任务"],
+      "reference_doc": "tutorial_dependencies,tutorial_background-tasks"
+    },
+    {
+      "id": 17,
+      "question": "FastAPI 中如何同时实现 OAuth2 认证和基于角色的权限控制？",
+      "expected_route": "decompose",
+      "category": "complex",
+      "expected_keywords": ["OAuth2", "权限", "security", "角色"],
+      "reference_doc": "tutorial_security"
+    },
+    {
+      "id": 18,
+      "question": "FastAPI 的请求验证和响应序列化分别是怎么工作的？它们的性能影响如何？",
+      "expected_route": "decompose",
+      "category": "complex",
+      "expected_keywords": ["validation", "serialization", "Pydantic", "性能"],
+      "reference_doc": "tutorial_body,tutorial_response-model"
+    },
+    {
+      "id": 19,
+      "question": "FastAPI 中间件和依赖注入都可以做请求预处理，它们各自的适用场景是什么？",
+      "expected_route": "decompose",
+      "category": "complex",
+      "expected_keywords": ["middleware", "Depends", "中间件", "依赖注入", "预处理"],
+      "reference_doc": "tutorial_middleware,tutorial_dependencies"
+    },
+    {
+      "id": 20,
+      "question": "如何在 FastAPI 项目中组织大型应用的路由结构？包括 APIRouter 的使用和项目目录规范",
+      "expected_route": "decompose",
+      "category": "complex",
+      "expected_keywords": ["APIRouter", "路由", "项目结构", "大型应用"],
+      "reference_doc": "tutorial_bigger-applications"
+    },
+    {
+      "id": 21,
+      "question": "FastAPI 中如何实现文件上传并同时携带表单字段？涉及哪些数据类型和限制？",
+      "expected_route": "decompose",
+      "category": "complex",
+      "expected_keywords": ["UploadFile", "Form", "File", "混合上传"],
+      "reference_doc": "tutorial_request-files,tutorial_request-forms"
+    },
+    {
+      "id": 22,
+      "question": "FastAPI 的自动文档生成是如何工作的？Swagger UI 和 ReDoc 有什么区别？如何自定义文档？",
+      "expected_route": "decompose",
+      "category": "complex",
+      "expected_keywords": ["Swagger", "ReDoc", "OpenAPI", "自动文档"],
+      "reference_doc": "features,tutorial_metadata"
+    },
+    {
+      "id": 23,
+      "question": "FastAPI 如何处理 WebSocket 连接的异常断开和重连？与 HTTP 长轮询相比有什么优劣？",
+      "expected_route": "decompose",
+      "category": "complex",
+      "expected_keywords": ["WebSocket", "断开", "重连", "长轮询"],
+      "reference_doc": "tutorial_websockets"
+    },
+    {
+      "id": 24,
+      "question": "在 FastAPI 中如何实现分页查询？结合数据库和查询参数的最佳实践是什么？",
+      "expected_route": "decompose",
+      "category": "complex",
+      "expected_keywords": ["分页", "pagination", "skip", "limit", "查询参数"],
+      "reference_doc": "tutorial_query-params,tutorial_sql-databases"
+    },
+    {
+      "id": 25,
+      "question": "FastAPI 的测试方法有哪些？如何用 TestClient 测试依赖注入和异步端点？",
+      "expected_route": "decompose",
+      "category": "complex",
+      "expected_keywords": ["TestClient", "测试", "testing", "依赖注入", "异步"],
+      "reference_doc": "tutorial_testing"
+    },
+    {
+      "id": 26,
+      "question": "Python 的 list 和 tuple 有什么区别？",
+      "expected_route": "direct_answer",
+      "category": "general",
+      "expected_keywords": ["list", "tuple", "可变", "不可变"],
+      "reference_doc": null
+    },
+    {
+      "id": 27,
+      "question": "什么是 REST API？",
+      "expected_route": "direct_answer",
+      "category": "general",
+      "expected_keywords": ["REST", "HTTP", "API", "资源"],
+      "reference_doc": null
+    },
+    {
+      "id": 28,
+      "question": "HTTP 的 GET 和 POST 方法有什么区别？",
+      "expected_route": "direct_answer",
+      "category": "general",
+      "expected_keywords": ["GET", "POST", "幂等", "请求体"],
+      "reference_doc": null
+    },
+    {
+      "id": 29,
+      "question": "什么是异步编程？async 和 await 的作用是什么？",
+      "expected_route": "direct_answer",
+      "category": "general",
+      "expected_keywords": ["async", "await", "异步", "协程"],
+      "reference_doc": null
+    },
+    {
+      "id": 30,
+      "question": "什么是 JSON Web Token（JWT）？它的结构是怎样的？",
+      "expected_route": "direct_answer",
+      "category": "general",
+      "expected_keywords": ["JWT", "header", "payload", "signature"],
+      "reference_doc": null
+    },
+    {
+      "id": 31,
+      "question": "Python 中的装饰器是什么？怎么使用？",
+      "expected_route": "direct_answer",
+      "category": "general",
+      "expected_keywords": ["decorator", "装饰器", "@", "函数"],
+      "reference_doc": null
+    },
+    {
+      "id": 32,
+      "question": "什么是 Docker？如何用 Docker 部署应用？",
+      "expected_route": "direct_answer",
+      "category": "general",
+      "expected_keywords": ["Docker", "容器", "container", "镜像"],
+      "reference_doc": null
+    },
+    {
+      "id": 33,
+      "question": "FastAPI 和 Spring Boot 哪个性能更好？详细对比一下",
+      "expected_route": "retrieve",
+      "category": "out_of_scope",
+      "expected_keywords": [],
+      "reference_doc": null,
+      "note": "知识库中没有 Spring Boot 对比信息，Agent 应该坦诚说明"
+    },
+    {
+      "id": 34,
+      "question": "FastAPI 中如何集成 Kafka 消息队列？",
+      "expected_route": "retrieve",
+      "category": "out_of_scope",
+      "expected_keywords": [],
+      "reference_doc": null,
+      "note": "文档中大概率没有 Kafka 集成内容"
+    },
+    {
+      "id": 35,
+      "question": "FastAPI 如何部署到 AWS Lambda 上？详细步骤是什么？",
+      "expected_route": "retrieve",
+      "category": "out_of_scope",
+      "expected_keywords": [],
+      "reference_doc": null,
+      "note": "文档可能只有简单部署介绍，没有 AWS Lambda 具体步骤"
+    },
+    {
+      "id": 36,
+      "question": "如何用 FastAPI 实现 GraphQL 接口？",
+      "expected_route": "retrieve",
+      "category": "out_of_scope",
+      "expected_keywords": [],
+      "reference_doc": null,
+      "note": "FastAPI 文档主要讲 REST，GraphQL 可能没有覆盖"
+    },
+    {
+      "id": 37,
+      "question": "FastAPI 中如何实现微服务间的 gRPC 通信？",
+      "expected_route": "retrieve",
+      "category": "out_of_scope",
+      "expected_keywords": [],
+      "reference_doc": null,
+      "note": "文档中大概率没有 gRPC 内容"
+    },
+    {
+      "id": 38,
+      "question": "FastAPI 的响应模型和请求体模型可以复用吗？如何设计模型继承体系来减少代码重复？",
+      "expected_route": "decompose",
+      "category": "complex",
+      "expected_keywords": ["BaseModel", "继承", "复用", "response_model"],
+      "reference_doc": "tutorial_body,tutorial_response-model"
+    },
+    {
+      "id": 39,
+      "question": "FastAPI 中如何处理 Cookie 和 Header 参数？",
+      "expected_route": "retrieve",
+      "category": "simple",
+      "expected_keywords": ["Cookie", "Header", "参数"],
+      "reference_doc": "tutorial_cookie-params,tutorial_header-params"
+    },
+    {
+      "id": 40,
+      "question": "FastAPI 的生命周期事件（startup 和 shutdown）是怎么用的？",
+      "expected_route": "retrieve",
+      "category": "simple",
+      "expected_keywords": ["startup", "shutdown", "lifespan", "生命周期"],
+      "reference_doc": "tutorial_events"
+    }
+  ]
+}

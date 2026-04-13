@@ -1,0 +1,19 @@
+llm:
+  provider: deepseek  # deepseek / zhipu / qwen / openai
+  # api_key: sk-xxx  # Or set via .env file: DEEPSEEK_API_KEY=sk-xxx
+  temperature: 0.0
+  max_tokens: 2048
+
+embedding:
+  model_name: BAAI/bge-base-zh-v1.5
+  device: cuda  # cuda / cpu
+
+retriever:
+  top_k: 5
+  chunk_size: 512
+  chunk_overlap: 50
+  use_rerank: false   # Phase 3
+  use_bm25: false     # Phase 3
+
+index_dir: ./index
+verbose: false
