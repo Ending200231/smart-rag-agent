@@ -28,6 +28,9 @@ config.yaml
 # Eval results (generated, not source)
 eval/results.json
 
+# Interview materials (personal)
+interview/
+
 # OS
 .DS_Store
 Thumbs.db
