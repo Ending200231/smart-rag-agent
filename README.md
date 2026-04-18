@@ -29,27 +29,27 @@ Traditional RAG has three pain points:
                                 │
             ┌───────────────────┼───────────────────┐
             │                   │                   │
-   ┌────────▼────────┐  ┌──────▼──────┐  ┌─────────▼─────────┐
-   │  Direct Answer  │  │  Retrieve   │  │    Decompose      │
-   │  (skip retrieval│  │  FAISS+BM25 │  │  split to sub-    │
-   │   LLM answers   │  │  +Rerank    │  │  queries, each    │
-   │   directly)     │  │             │  │  retrieves once   │
-   └────────┬────────┘  └──────┬──────┘  └─────────┬─────────┘
-            │                  │                    │
-            │         ┌───────▼────────┐            │
-            │         │Evaluate Result │            │
-            │         └───────┬────────┘            │
-            │            ┌────┴─────┐               │
-            │       sufficient  insufficient        │
-            │            │       ↓ rewrite query    │
-            │            │     [retry, max 3]       │
-            │            │                          │
-            │         ┌──▼──────────┐               │
-            │         │  Generate   │◄──────────────┘
-            │         │(with context│
-            │         └──────┬──────┘
-            │                │
-            └───────┬────────┘
+   ┌────────▼────────┐   ┌──────▼──────┐  ┌─────────▼─────────┐
+   │  Direct Answer  │   │  Retrieve   │  │    Decompose      │
+   │  (skip retrieval│   │  FAISS+BM25 │  │                   │
+   │   LLM answers   │   │  +Rerank    │  │   (sub-queries)   │
+   │   directly)     │   │             │  │                   │
+   └────────┬────────┘   └──────┬──────┘  └─────────┬─────────┘
+            │                   │                   │
+            │          ┌───────▼────────┐           │
+            │          │Evaluate Result │           │
+            │          └───────┬────────┘           │
+            │             ┌────┴─────┐              │
+            │        sufficient  insufficient       │
+            │             │       ↓ rewrite         │
+            │             │     [retry, max 3]      │
+            │             │                         │
+            │          ┌──▼──────────┐              │
+            │          │  Generate   │◄─────────────┘
+            │          │ with context│
+            │          └──────┬──────┘
+            │                 │
+            └───────┬─────────┘
                     │
            ┌────────▼────────┐
            │  Agent Response │
@@ -67,6 +67,7 @@ Traditional RAG has three pain points:
 - **Adaptive routing**: 3 strategies — direct answer, single retrieval, decompose & multi-retrieve
 - **Self-evaluation**: Agent judges if retrieved docs are sufficient, retries with rewritten query (max 3 attempts)
 - **Multi-path recall**: FAISS (semantic) + BM25 (keyword) + Reranker (cross-encoder)
+- **HyDE** (Hypothetical Document Embeddings): generates a hypothetical answer, embeds it as a document vector for FAISS search — bridging the semantic gap between short queries and long documents
 
 ## Quick Start
 

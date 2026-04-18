@@ -63,6 +63,7 @@ class RetrieverConfig:
     rerank_model: str = "BAAI/bge-reranker-base"
     use_rerank: bool = False  # Phase 3 enables this
     use_bm25: bool = False    # Phase 3 enables this
+    use_hyde: bool = False    # HyDE: hypothetical document embeddings
 
 
 @dataclass

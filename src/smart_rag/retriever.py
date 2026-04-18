@@ -6,6 +6,7 @@ import numpy as np
 from langchain_community.vectorstores import FAISS
 from langchain_core.documents import Document
 from langchain_core.prompts import ChatPromptTemplate
+from langchain_openai import ChatOpenAI
 from rank_bm25 import BM25Okapi
 
 from smart_rag.config import Config, RetrieverConfig
@@ -34,15 +35,27 @@ RAG_PROMPT = ChatPromptTemplate.from_messages([
 ])
 
 
-class SmartRetriever:
-    """Multi-path retriever with optional BM25 and Reranking."""
+HYDE_PROMPT = ChatPromptTemplate.from_messages([
+    ("system", """You are a technical documentation writer. Given a question, write a short paragraph that would appear in the documentation to answer this question. Write it as if it were part of the actual documentation, not as a Q&A response. Be specific and use technical terms. Keep it under 150 words."""),
+    ("human", "{question}"),
+])
 
-    def __init__(self, vectorstore: FAISS, config: RetrieverConfig | None = None):
+
+class SmartRetriever:
+    """Multi-path retriever with optional BM25, Reranking, and HyDE."""
+
+    def __init__(
+        self,
+        vectorstore: FAISS,
+        config: RetrieverConfig | None = None,
+        llm: ChatOpenAI | None = None,
+    ):
         self.vectorstore = vectorstore
         self.config = config or RetrieverConfig()
         self._bm25 = None
         self._bm25_docs = None
         self._reranker = None
+        self._llm = llm  # needed for HyDE
 
         if self.config.use_bm25:
             self._init_bm25()
@@ -83,6 +96,20 @@ class SmartRetriever:
         import re
         return re.findall(r'\w+', text.lower())
 
+    def generate_hypothetical_doc(self, query: str) -> str:
+        """Generate a hypothetical document for HyDE."""
+        chain = HYDE_PROMPT | self._llm
+        response = chain.invoke({"question": query})
+        return response.content
+
+    def _hyde_vector_search(self, query: str, k: int) -> list[Document]:
+        """FAISS search using HyDE: embed hypothetical doc instead of query."""
+        hypo_doc = self.generate_hypothetical_doc(query)
+        # Embed as document (no query prefix) — hypothetical doc is closer to real docs
+        embed_fn = self.vectorstore.embedding_function
+        doc_vector = embed_fn.embed_documents([hypo_doc])[0]
+        return self.vectorstore.similarity_search_by_vector(doc_vector, k=k)
+
     def retrieve(self, query: str) -> list[Document]:
         """Retrieve documents using configured strategy."""
         if self.config.use_bm25 and self._bm25:
@@ -93,7 +120,11 @@ class SmartRetriever:
     def _vector_retrieve(self, query: str) -> list[Document]:
         """Pure vector similarity search."""
         k = self.config.top_k_initial if self.config.use_rerank else self.config.top_k
-        docs = self.vectorstore.similarity_search(query, k=k)
+
+        if self.config.use_hyde and self._llm:
+            docs = self._hyde_vector_search(query, k=k)
+        else:
+            docs = self.vectorstore.similarity_search(query, k=k)
 
         if self.config.use_rerank and self._reranker:
             docs = self._rerank(query, docs)
@@ -104,8 +135,11 @@ class SmartRetriever:
         """Combine vector search + BM25, then optionally rerank."""
         k_initial = self.config.top_k_initial if self.config.use_rerank else self.config.top_k
 
-        # Vector search
-        vector_docs = self.vectorstore.similarity_search(query, k=k_initial)
+        # Vector search (HyDE if enabled, original query otherwise)
+        if self.config.use_hyde and self._llm:
+            vector_docs = self._hyde_vector_search(query, k=k_initial)
+        else:
+            vector_docs = self.vectorstore.similarity_search(query, k=k_initial)
 
         # BM25 search
         tokenized_query = self._tokenize(query)

@@ -117,7 +117,7 @@ def build_graph(
 ) -> StateGraph:
     """Build the adaptive retrieval agent graph with evaluation loop."""
     config = retriever_config or RetrieverConfig()
-    retriever = SmartRetriever(vectorstore, config)
+    retriever = SmartRetriever(vectorstore, config, llm=llm)
 
     def analyze_query_node(state: AgentState) -> dict:
         start = time.time()
@@ -152,6 +152,8 @@ def build_graph(
         attempts = state.get("retrieval_attempts", 0) + 1
 
         mode = "ensemble" if config.use_bm25 else "vector"
+        if config.use_hyde:
+            mode += "+hyde"
         if config.use_rerank:
             mode += "+rerank"
 
